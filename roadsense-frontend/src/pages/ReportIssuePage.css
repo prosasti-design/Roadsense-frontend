@@ -1,0 +1,278 @@
+.report-page {
+  min-height: 72vh;
+  padding: 36px 24px;
+}
+
+.report-form-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(15, 76, 129, 0.1);
+}
+
+.back-link {
+  color: #0f4c81;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.report-form-container h1 {
+  margin: 18px 0 8px;
+  color: #0f4c81;
+}
+
+.report-form-container > p {
+  margin-bottom: 28px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  color: #1f2937;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.input-group textarea {
+  resize: vertical;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: #0f4c81;
+  box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.12);
+}
+
+.form-error {
+  margin: -4px 0 16px;
+  color: #b91c1c;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.submit-report-button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 7px;
+  background: #0f4c81;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.submit-report-button:hover {
+  background: #0a355a;
+}
+
+@media (max-width: 600px) {
+  .report-form-container {
+    padding: 24px 18px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+.location-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 4px 0 10px;
+  padding: 14px;
+  background: #eef6fb;
+  border: 1px solid #c9dfed;
+  border-radius: 8px;
+}
+
+.location-box strong {
+  color: #0f4c81;
+  font-size: 14px;
+}
+
+.location-box p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.location-button {
+  padding: 9px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #0f4c81;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.location-button:hover {
+  background: #0a355a;
+}
+
+.location-message {
+  margin: 0 0 16px;
+  color: #0f4c81;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.image-help {
+  display: block;
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.image-preview-box {
+  margin: -4px 0 20px;
+  padding: 14px;
+  border: 1px solid #dbe4ec;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.image-preview-box p {
+  margin: 0 0 10px;
+  color: #0f4c81;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.image-preview-box img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+  .location-box {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .location-button {
+    width: 100%;
+  }
+}
+.location-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 4px 0 10px;
+  padding: 14px;
+  background: #eef6fb;
+  border: 1px solid #c9dfed;
+  border-radius: 8px;
+}
+
+.location-box strong {
+  color: #0f4c81;
+  font-size: 14px;
+}
+
+.location-box p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.location-button {
+  padding: 9px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #0f4c81;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.location-button:hover {
+  background: #0a355a;
+}
+
+.location-message {
+  margin: 0 0 16px;
+  color: #0f4c81;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.image-help {
+  display: block;
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.image-preview-box {
+  margin: -4px 0 20px;
+  padding: 14px;
+  border: 1px solid #dbe4ec;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.image-preview-box p {
+  margin: 0 0 10px;
+  color: #0f4c81;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.image-preview-box img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+  .location-box {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .location-button {
+    width: 100%;
+  }
+}
