@@ -52,6 +52,9 @@ function Navbar() {
           <NavLink to="/contact" className={({ isActive }) => isActive ? "gov-nav-link active-gov-link" : "gov-nav-link"}>
   {t.contactUs}
 </NavLink>
+<NavLink to="/voice-upload" className={({ isActive }) => isActive ? "gov-nav-link active-gov-link" : "gov-nav-link"}>
+  Voice Upload
+</NavLink>
           <NavLink to="/login" className={({ isActive }) => isActive ? "government-login-button active-government-login" : "government-login-button"}>{t.login}</NavLink>
         </nav>
       </div>

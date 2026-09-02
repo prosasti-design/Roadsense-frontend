@@ -17,7 +17,7 @@ import SignUpPage from "./pages/SignUpPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import CitizenPortal from "./pages/CitizenPortal";
 import LiveMapPage from "./pages/LiveMapPage";
-
+import VoiceUploadPage from "./pages/VoiceUploadPage";
 function App() {
   return (
     <LanguageProvider>
@@ -41,6 +41,7 @@ function App() {
 
             {/* DASHBOARD */}
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/voice-upload" element={<VoiceUploadPage />} />
 
             {/* CITIZEN */}
             <Route
