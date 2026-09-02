@@ -25,18 +25,32 @@ function VoiceUploadPage() {
   const fileInputRef = useRef(null);
 
   function handleFileSelect(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+  const file = event.target.files?.[0];
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImage(reader.result);
-      setScanComplete(false);
-      setIssueType("");
-      startScan();
-    };
-    reader.readAsDataURL(file);
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    setError("Please select an image file.");
+    return;
   }
+
+  setError("");
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    setImage(reader.result);
+    setScanComplete(false);
+    setIssueType("");
+    startScan();
+  };
+
+  reader.onerror = () => {
+    setError("Could not read the selected image.");
+  };
+
+  reader.readAsDataURL(file);
+}
 
   function startScan() {
     setScanning(true);
@@ -70,59 +84,90 @@ function VoiceUploadPage() {
   }
 
   async function startRecording() {
-    setError("");
+  setError("");
 
+  try {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      setError("Your browser does not support audio recording.");
+      setError("Audio recording is not supported in this browser.");
       return;
     }
 
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      streamRef.current = stream;
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+    });
 
-      mediaRecorderRef.current = new MediaRecorder(stream);
-      audioChunksRef.current = [];
+    streamRef.current = stream;
 
-      mediaRecorderRef.current.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          audioChunksRef.current.push(event.data);
-        }
-      };
+    let options = {};
 
-      mediaRecorderRef.current.onstop = () => {
-        const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
-        setAudioBlob(blob);
-        const url = URL.createObjectURL(blob);
-        setAudioUrl(url);
-      };
+    if (MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) {
+      options = { mimeType: "audio/webm;codecs=opus" };
+    } else if (MediaRecorder.isTypeSupported("audio/webm")) {
+      options = { mimeType: "audio/webm" };
+    }
 
-      mediaRecorderRef.current.start();
-      setRecording(true);
-    } catch (err) {
-      console.error("Microphone error:", err);
-      if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
-        setError("Microphone permission denied. Please allow microphone access in your browser settings.");
-      } else if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
-        setError("No microphone found. Please connect a microphone.");
-      } else {
-        setError("Could not access microphone. Please check your browser settings.");
+    const recorder = new MediaRecorder(stream, options);
+
+    mediaRecorderRef.current = recorder;
+    audioChunksRef.current = [];
+
+    recorder.ondataavailable = (event) => {
+      if (event.data && event.data.size > 0) {
+        audioChunksRef.current.push(event.data);
       }
+    };
+
+    recorder.onstop = () => {
+      const mimeType = recorder.mimeType || "audio/webm";
+
+      const blob = new Blob(audioChunksRef.current, {
+        type: mimeType,
+      });
+
+      setAudioBlob(blob);
+
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl);
+      }
+
+      const url = URL.createObjectURL(blob);
+      setAudioUrl(url);
+    };
+
+    recorder.onerror = () => {
+      setError("Recording failed. Please try again.");
+    };
+
+    recorder.start();
+    setRecording(true);
+  } catch (err) {
+    console.error("Microphone error:", err);
+
+    if (err.name === "NotAllowedError") {
+      setError(
+        "Microphone permission denied. Please allow microphone access and try again."
+      );
+    } else if (err.name === "NotFoundError") {
+      setError("No microphone found on this device.");
+    } else {
+      setError("Could not access microphone. Please check browser permissions.");
     }
   }
-
+}
   function stopRecording() {
-    if (mediaRecorderRef.current && recording) {
-      mediaRecorderRef.current.stop();
-      setRecording(false);
+  const recorder = mediaRecorderRef.current;
 
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((track) => track.stop());
-        streamRef.current = null;
-      }
-    }
+  if (recorder && recorder.state !== "inactive") {
+    recorder.stop();
   }
 
+  setRecording(false);
+
+  if (streamRef.current) {
+    streamRef.current.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+  }
+}
   function openCamera() {
     const input = document.createElement("input");
     input.type = "file";
