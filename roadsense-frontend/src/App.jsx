@@ -4,7 +4,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import "./index.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
+import ContactsPage from "./pages/ContactsPage";
 import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -47,7 +47,7 @@ function App() {
               path="/report-issue"
               element={<ReportIssuePage />}
             />
-
+<Route path="/contact" element={<ContactsPage />} />
             <Route
               path="/my-reports"
               element={<MyReportsPage />}

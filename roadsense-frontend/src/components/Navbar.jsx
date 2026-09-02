@@ -49,6 +49,9 @@ function Navbar() {
           <NavLink to="/report-issue" className={({ isActive }) => isActive ? "gov-nav-link active-gov-link" : "gov-nav-link"}>{t.reportIssue}</NavLink>
           <NavLink to="/my-reports" className={({ isActive }) => isActive ? "gov-nav-link active-gov-link" : "gov-nav-link"}>{t.myReports}</NavLink>
           <NavLink to="/about" className={({ isActive }) => isActive ? "gov-nav-link active-gov-link" : "gov-nav-link"}>{t.about}</NavLink>
+          <NavLink to="/contact" className={({ isActive }) => isActive ? "gov-nav-link active-gov-link" : "gov-nav-link"}>
+  {t.contactUs}
+</NavLink>
           <NavLink to="/login" className={({ isActive }) => isActive ? "government-login-button active-government-login" : "government-login-button"}>{t.login}</NavLink>
         </nav>
       </div>
